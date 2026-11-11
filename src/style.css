@@ -1,0 +1,660 @@
+/* =========================================
+   1. VARIABLES Y RESET GLOBAL
+   ========================================= */
+:root {
+  --primary: #2980b9;
+  --primary-hover: #1f618d;
+  --success: #27ae60;
+  --success-hover: #219150;
+  --danger: #e74c3c;
+  --danger-hover: #c0392b;
+  --purple: #8e44ad;
+  --purple-hover: #732d91;
+  --bg: #f4f6f9;
+  --surface: #ffffff;
+  --text: #2c3e50;
+  --text-light: #7f8c8d;
+  --border: #e0e6ed;
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg);
+  color: var(--text);
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+span,
+label,
+th,
+td {
+  color: var(--text);
+}
+
+/* =========================================
+   2. HEADER Y NAVEGACIÓN
+   ========================================= */
+header {
+  background-color: var(--text);
+  color: white !important;
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+header h1,
+header p {
+  color: white !important;
+  margin: 0;
+}
+header h1 {
+  font-size: 20px;
+}
+header p {
+  font-size: 12px;
+  opacity: 0.8;
+  display: none;
+}
+
+nav {
+  display: flex;
+  background-color: var(--surface);
+  padding: 0 10px;
+  gap: 5px;
+  border-bottom: 2px solid var(--border);
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+}
+nav::-webkit-scrollbar {
+  display: none;
+}
+
+.nav-btn {
+  padding: 15px 15px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  color: var(--text-light);
+  transition: all 0.2s ease;
+  border-bottom: 3px solid transparent;
+  white-space: nowrap;
+}
+.nav-btn:hover {
+  background-color: #f8f9fa;
+  color: var(--primary);
+}
+.nav-btn.active {
+  color: var(--primary);
+  border-bottom: 3px solid var(--primary);
+  background-color: #ebf5fb;
+}
+
+/* =========================================
+   3. CONTENEDOR PRINCIPAL Y TARJETAS
+   ========================================= */
+main {
+  padding: 15px;
+  max-width: 1300px;
+  margin: auto;
+}
+
+.tab-content {
+  animation: fadeIn 0.2s ease-in-out;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card {
+  background: var(--surface);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+  margin-bottom: 20px;
+  border: 1px solid var(--border);
+}
+
+/* =========================================
+   4. FORMULARIOS E INPUTS
+   ========================================= */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  margin-bottom: 20px;
+  align-items: end;
+}
+.input-group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 15px;
+}
+.input-group label {
+  font-weight: 600;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: var(--text);
+}
+
+input,
+select {
+  padding: 12px 15px;
+  font-size: 16px; /* Evita zoom en móviles */
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  width: 100%;
+  transition: all 0.2s ease;
+  background-color: #fafbfc;
+  color: var(--text) !important;
+}
+input:focus,
+select:focus {
+  outline: none;
+  border-color: var(--primary);
+  background-color: var(--surface);
+  box-shadow: 0 0 0 4px rgba(41, 128, 185, 0.1);
+}
+
+/* =========================================
+   5. BOTONES GENERALES
+   ========================================= */
+button {
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  color: white;
+  min-height: 44px;
+}
+button:active {
+  transform: scale(0.97);
+}
+
+.btn-primario,
+.btn-add {
+  background-color: var(--primary);
+  color: white;
+  padding: 12px 20px;
+  font-size: 16px;
+  width: 100%;
+}
+.btn-add {
+  background-color: var(--success);
+}
+.btn-primario:hover {
+  background-color: var(--primary-hover);
+}
+.btn-add:hover {
+  background-color: var(--success-hover);
+}
+
+/* =========================================
+   6. SECCIÓN VENTAS (PANEL Y CARRITO)
+   ========================================= */
+.panel-venta {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* EL TRUCO: Obliga a los hijos del grid a respetar el ancho de la pantalla */
+.panel-venta > * {
+  min-width: 0;
+  max-width: 100%;
+}
+
+@media (min-width: 768px) {
+  .panel-venta {
+    grid-template-columns: 1fr 1.5fr;
+    gap: 20px;
+  }
+}
+
+.form-venta,
+.carrito-container {
+  background: var(--surface);
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+  border: 1px solid var(--border);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+  .form-venta,
+  .carrito-container {
+    padding: 20px;
+  }
+}
+
+/* =========================================
+   7. CONTENEDOR DE COBRO
+   ========================================= */
+.cobro-container {
+  background: var(--surface);
+  padding: 20px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  border-top: 5px solid var(--success);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+@media (min-width: 768px) {
+  .cobro-container {
+    flex-direction: row;
+    align-items: stretch;
+  }
+}
+
+.cobro-metodo {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.cobro-metodo label {
+  font-weight: 600;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: var(--text-light);
+}
+.cobro-metodo select {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.btn-cobrar {
+  background-color: var(--success);
+  color: white;
+  font-size: 18px;
+  padding: 15px;
+  width: 100%;
+  flex: 2;
+  box-shadow: 0 4px 10px rgba(39, 174, 96, 0.3);
+}
+.btn-cobrar:hover {
+  background-color: var(--success-hover);
+}
+
+/* =========================================
+   8. BUSCADOR PREDICTIVO (LISTA FLOTANTE)
+   ========================================= */
+.buscador-container {
+  position: relative;
+}
+.venta-producto-input {
+  border: 2px solid var(--primary) !important;
+  background-color: #f0f8ff !important;
+}
+.venta-producto-input:focus {
+  box-shadow: 0 0 0 4px rgba(41, 128, 185, 0.2);
+}
+
+.lista-resultados {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0;
+  right: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  max-height: 250px;
+  overflow-y: auto;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  z-index: 9999;
+}
+.lista-resultados li {
+  padding: 15px;
+  cursor: pointer;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.lista-resultados li:last-child {
+  border-bottom: none;
+}
+.lista-resultados li:hover {
+  background-color: #f0f8ff;
+}
+
+.res-nombre {
+  font-weight: 600;
+  font-size: 15px;
+}
+.res-precio {
+  color: var(--success) !important;
+  font-weight: 700;
+  display: block;
+}
+.res-stock {
+  color: var(--text-light) !important;
+  font-size: 12px;
+}
+.res-stock-bajo {
+  color: var(--danger) !important;
+  font-weight: 700;
+}
+
+/* =========================================
+   9. BARRA DE FILTROS
+   ========================================= */
+.barra-filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  background: var(--surface);
+  padding: 15px;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  border: 1px solid var(--border);
+}
+.filtro-item {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+@media (min-width: 768px) {
+  .filtro-item {
+    flex-direction: row;
+    align-items: center;
+    flex: 1;
+    width: auto;
+  }
+  .filtro-item label {
+    margin-right: 10px;
+    margin-bottom: 0;
+    white-space: nowrap;
+  }
+}
+
+/* =========================================
+   10. TABLAS RESPONSIVAS
+   ========================================= */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  background: var(--surface);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px; /* Fuerza scroll en móviles */
+}
+th,
+td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+th {
+  background-color: #f8f9fa;
+  font-size: 12px;
+  text-transform: uppercase;
+  color: var(--text-light) !important;
+  font-weight: 700;
+}
+tr:last-child td {
+  border-bottom: none;
+}
+tbody tr:nth-child(even) {
+  background-color: #fafbfc;
+}
+tbody tr:hover {
+  background-color: #f8fbfe;
+}
+
+/* Botones dentro de tablas */
+.col-acciones {
+  text-align: right;
+}
+.btn-accion {
+  padding: 8px 12px;
+  font-size: 14px;
+  margin-left: 5px;
+  border-radius: 6px;
+  color: white !important;
+  min-height: 36px;
+}
+.btn-sumar {
+  background-color: #3498db;
+}
+.btn-restar {
+  background-color: #f39c12;
+}
+.btn-eliminar {
+  background-color: var(--danger);
+}
+.btn-editar {
+  background-color: #2ecc71;
+}
+
+/* =========================================
+   11. MODALES
+   ========================================= */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(44, 62, 80, 0.8);
+  backdrop-filter: blur(4px);
+  z-index: 10000;
+  justify-content: center;
+  align-items: center;
+}
+.modal-overlay.active {
+  display: flex;
+}
+
+.modal-contenido {
+  background: var(--surface);
+  padding: 20px;
+  border-radius: 16px;
+  width: 95%;
+  max-width: 450px;
+  max-height: 90vh;
+  overflow-y: auto;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  animation: modalScale 0.2s ease-out;
+}
+@keyframes modalScale {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.modal-contenido h3 {
+  margin-top: 0;
+  font-size: 20px;
+}
+.modal-contenido p {
+  font-size: 14px;
+  color: var(--text-light) !important;
+  margin-bottom: 20px;
+}
+.modal-contenido input {
+  margin-bottom: 10px;
+}
+
+.modal-botones {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+@media (min-width: 768px) {
+  .modal-botones {
+    flex-direction: row;
+    justify-content: center;
+  }
+  .modal-botones button {
+    width: auto;
+    min-width: 120px;
+  }
+}
+
+.btn-cancelar {
+  background-color: #ecf0f1;
+  color: var(--text) !important;
+  padding: 12px 20px;
+  width: 100%;
+}
+.btn-cancelar:hover {
+  background-color: #bdc3c7;
+}
+
+/* Ajuste especial para el modal de carga masiva (ancho) */
+.modal-large {
+  max-width: 950px;
+  text-align: left;
+}
+.modal-large .modal-botones {
+  justify-content: flex-end;
+}
+
+/* =========================================
+   12. ETIQUETAS (BADGES)
+   ========================================= */
+.badge-pago {
+  background-color: #ecf0f1;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+  color: var(--text) !important;
+  border: 1px solid #bdc3c7;
+}
+.badge-ingreso {
+  background-color: #d4edda;
+  color: #155724 !important;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+}
+.badge-perdida {
+  background-color: #f8d7da;
+  color: #721c24 !important;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+}
+.nota {
+  font-size: 13px;
+  color: var(--text-light) !important;
+  font-style: italic;
+  margin-top: 10px;
+}
+
+/* =========================================
+   13. MEDIA QUERIES FINALES (PC)
+   ========================================= */
+@media (min-width: 768px) {
+  header h1 {
+    font-size: 24px;
+  }
+  header p {
+    display: block;
+  }
+  main {
+    padding: 25px;
+  }
+  .btn-primario,
+  .btn-add {
+    width: auto;
+  }
+}
+
+.btn-voz-busqueda {
+  background-color: #8e44ad !important; /* Morado */
+  color: #ffffff !important;
+  width: 100%;
+  border: none;
+  font-weight: bold;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.btn-voz-busqueda:hover {
+  background-color: #732d91 !important;
+}
+
+/* Cuando está escuchando, se pone rojo */
+.btn-voz-busqueda.escuchando {
+  background-color: #e74c3c !important; /* Rojo */
+  animation: pulse 1.5s infinite;
+}
+
+/* Cuando el botón está deshabilitado (por si acaso) */
+.btn-voz-busqueda:disabled {
+  background-color: #bdc3c7 !important; /* Gris solo si está bloqueado */
+  cursor: not-allowed;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+  }
+}

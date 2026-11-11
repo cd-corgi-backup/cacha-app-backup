@@ -1,0 +1,10 @@
+[
+	{
+		"pkg": "@capacitor-community/speech-recognition",
+		"classpath": "com.getcapacitor.community.speechrecognition.SpeechRecognition"
+	},
+	{
+		"pkg": "@capgo/capacitor-speech-recognition",
+		"classpath": "app.capgo.speechrecognition.SpeechRecognitionPlugin"
+	}
+]
